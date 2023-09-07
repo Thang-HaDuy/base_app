@@ -12,6 +12,7 @@ namespace App.Areas.Identity.Models.AccountViewModels
     public class ForgotPasswordViewModel
     {
         [Required]
+        [Display(Name = "Email", Prompt = "Tài Khoản Email")]
         [EmailAddress]
         public string Email { get; set; }
     }

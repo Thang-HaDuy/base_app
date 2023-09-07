@@ -63,11 +63,11 @@ namespace App.Areas.Identity.Controllers
             if (ModelState.IsValid)
             {
                  
-                var result = await _signInManager.PasswordSignInAsync(model.UserNameOrEmail, model.Password, model.RememberMe, lockoutOnFailure: true);                
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: true);                
                 // Tìm UserName theo Email, đăng nhập lại
-                if ((!result.Succeeded) && AppUtilities.IsValidEmail(model.UserNameOrEmail))
+                if ((!result.Succeeded) && AppUtilities.IsValidEmail(model.Email))
                 {
-                    var user = await _userManager.FindByEmailAsync(model.UserNameOrEmail);
+                    var user = await _userManager.FindByEmailAsync(model.Email);
                     if (user != null)
                     {
                         result = await _signInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, lockoutOnFailure: true);

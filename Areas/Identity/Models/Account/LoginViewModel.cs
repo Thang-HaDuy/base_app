@@ -12,13 +12,13 @@ namespace App.Areas.Identity.Models.AccountViewModels
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Phải nhập {0}")]
-        [Display(Name = "Địa chỉ email hoặc tên tài khoản")]
-        public string UserNameOrEmail { get; set; }
+        [Display(Name = "Địa chỉ email", Prompt = "Địa chỉ email")]
+        public string Email { get; set; }
 
 
-        [Required]
+        [Required(ErrorMessage = "Phải nhập {0}")]
         [DataType(DataType.Password)]
-        [Display(Name = "Mật khẩu")]
+        [Display(Name = "Mật khẩu", Prompt = "Mật khẩu")]
         public string Password { get; set; }
 
         [Display(Name = "Nhớ thông tin đăng nhập?")]
