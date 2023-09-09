@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using App.Services;
 using App.Data;
 using App.Models;
+using App.Menu;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,10 @@ builder.Services.AddSingleton<IEmailSender, SendMailService>();
 
 
 builder.Services.AddSingleton<IdentityErrorDescriber, AppIdentityErrorDescriber>();
+
+builder.Services.AddTransient<IActionContextAccessor, ActionContextAccessor>();
+
+builder.Services.AddTransient<AdminSidebarService>();
 
 
 // Add services to the container.

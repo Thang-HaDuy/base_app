@@ -1,0 +1,59 @@
+@using Microsoft.EntityFrameworkCore
+@using System.Data
+
+@inject DataDbContext dbContext
+
+@{
+    ViewData["Title"] = "thông tin Db";
+    var connect = dbContext.Database.GetDbConnection();
+    var dbname = connect.Database;
+    var can_connect = dbContext.Database.CanConnect();
+}
+
+<h2>Thông Tin</h2>
+<p>- Database: @dbname</p>
+<p>- Souce: @connect.DataSource</p>
+<hr>
+<h2>Migration</h2>
+@foreach (var migration in dbContext.Database.GetAppliedMigrations())
+{
+    <p>@migration</p>
+}
+@foreach (var migration in dbContext.Database.GetPendingMigrations())
+{
+    <p>@migration (pending)</p>
+}
+@if (!can_connect)
+{
+    <p class="alert alert-danger">Không Có Khả Năng Kết Nối Đến Database</p>
+}
+
+@if (dbContext.Database.GetPendingMigrations().Any())
+{
+    <form method="post" asp-action="Migrate">
+        <button class="btn btn-success">Tạo Db (Cập Nhật Migration)</button>
+    </form>
+}
+
+<a class="btn btn-danger" asp-action="Seedata">Seed Data</a>
+<hr>
+
+@if (can_connect)
+{
+    <h2>Các Table</h2>
+    await dbContext.Database.OpenConnectionAsync();
+    var table = dbContext.Database.GetDbConnection().GetSchema("Tables");
+    <ul>
+        @foreach (System.Data.DataRow row in table.Rows)
+        {
+            <p>@row["TABLE_NAME"]</p>
+        }
+    </ul>
+}
+
+
+
+
+
+
+
