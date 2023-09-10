@@ -1,9 +1,12 @@
-@using Microsoft.EntityFrameworkCore
+@using App.Menu         
 @using System.Data
+@using Microsoft.EntityFrameworkCore
+@inject AdminSidebarService _AdminSidebarService
 
 @inject DataDbContext dbContext
 
 @{
+    Layout = "/Areas/Panel/Views/Shared/_LayoutAdmin.cshtml";
     ViewData["Title"] = "thông tin Db";
     var connect = dbContext.Database.GetDbConnection();
     var dbname = connect.Database;
@@ -49,6 +52,14 @@
             <p>@row["TABLE_NAME"]</p>
         }
     </ul>
+}
+
+@{
+    _AdminSidebarService.SetActive("DbManage", "Index", "");
+}
+@section Sidebar
+{
+    @Html.Raw(_AdminSidebarService.RenderHtml())
 }
 
 

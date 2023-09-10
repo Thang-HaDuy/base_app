@@ -34,3 +34,11 @@
         </tr>
     }
 </table>
+
+@{
+    _AdminSidebarService.SetActive("Role", "Index", "Identity");
+}
+@section Sidebar
+{
+    @Html.Raw(_AdminSidebarService.RenderHtml())
+}

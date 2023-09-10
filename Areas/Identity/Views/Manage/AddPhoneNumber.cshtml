@@ -3,7 +3,6 @@
     ViewData["Title"] = "Thêm số điện thoại";
 }
 
-<h1>@ViewData["Title"].</h1>
 <form asp-controller="Manage" asp-action="AddPhoneNumber" method="post" class="form-horizontal" role="form">
     <h4>Thêm số điện thoại.</h4>
     <hr />
@@ -24,4 +23,9 @@
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
+@section Sidebar
+{
+    @Html.Raw(_AdminSidebarService.RenderHtml())
 }

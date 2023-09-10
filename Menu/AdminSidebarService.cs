@@ -20,14 +20,34 @@ namespace App.Menu
             UrlHelper = factory.GetUrlHelper(action.ActionContext);
 
             Items.Add(new SideBarItem() { Type = SideBarItemType.Divider});
+            Items.Add(new SideBarItem() { Type = SideBarItemType.Heading, Title = "Quản lý chung"});
 
             Items.Add(new SideBarItem() { 
                 Type = SideBarItemType.NavItem,
-                Controller = "Home",
-                Action = "Index",
-                Title = "Home",
-                AwesomeIcon = "fas fa-home"
-                });
+                Title = "Quản lý User",
+                AwesomeIcon = "fas fa-users",
+                Controller = "User",
+                Action = "Index", 
+                Area = "Identity",
+            });
+            
+            Items.Add(new SideBarItem() { 
+                Type = SideBarItemType.NavItem,
+                Title = "Quản lý Role",
+                AwesomeIcon = "far fa-folder",
+                Controller = "Role",
+                Action = "Index", 
+                Area = "Identity",
+            });
+
+            Items.Add(new SideBarItem() { 
+                Type = SideBarItemType.NavItem,
+                Title = "Quản Lý Database",
+                AwesomeIcon = "fas fa-database",
+                Controller = "DbManage",
+                Action = "Index", 
+                Area = "",
+            });
         }
 
         public string RenderHtml()
