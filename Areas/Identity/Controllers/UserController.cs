@@ -85,6 +85,41 @@ namespace App.Areas.Identity.Controllers
             return View(model);
         } 
 
+        // GET: /ManageUser/Register
+        [HttpGet]
+        public IActionResult Register(string returnUrl = null)
+        {
+            returnUrl ??= Url.Content("~/");
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        // POST: /ManageUser/Register
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        {
+            returnUrl ??= Url.Content("~/");
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                var user = new AppUser { UserName = model.UserName, Email = model.Email, EmailConfirmed = true};
+                var result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("Đã tạo user mới.");
+                    return RedirectToAction("Index");
+                }
+
+                ModelState.AddModelError(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+        
+
         // GET: /ManageUser/AddRole/id
         [HttpGet("{id}")]
         public async Task<IActionResult> AddRoleAsync(string id)

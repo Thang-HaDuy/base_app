@@ -2,9 +2,12 @@
 @{
     ViewData["Title"] = "Danh sách các thành viên";
 }
-<h2>@ViewData["Title"]</h2>
+
 <partial name="_StatusMessage"></partial>
 <p>Tổng số thành viên: @Model.totalUsers</p>
+<div class="mb-2">
+    <a class="btn btn-secondary" asp-action="Register" asp-controller="ManageUser">Tạo User mới</a>
+</div>
 
 <table class="table">
     <tr>
