@@ -11,5 +11,10 @@
         "library": "font-awesome@5.15.3",
         "destination": "wwwroot/lib/font-awesome"
       }
+      ,
+      {
+        "library": "summernote@0.8.20",
+        "destination": "wwwroot/lib/summernote"
+      }
     ]
   }
